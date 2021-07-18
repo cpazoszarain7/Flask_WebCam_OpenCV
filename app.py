@@ -85,10 +85,10 @@ def test_message(input):
     # image_data = image_data.decode("utf-8")
 
     img = imread(io.BytesIO(base64.b64decode(image_data)))
-    # cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+    cv2_img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     # cv2_img = cv2.cvtColor(img,cv2.COLOR_GRAY2RGB)
     # cv2_img=img
-    cv2_img, _ = detect(image=img)
+    cv2_img, _ = detect(image=cv2_img)
     time.sleep(0.01)
     cv2.imwrite("reconstructed.jpg", cv2_img)
     retval, buffer = cv2.imencode('.jpg', cv2_img)

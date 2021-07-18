@@ -5,45 +5,64 @@
         <meta content="ugh, hi." name="description">
         <meta content="Makeup Webcam" name="title">
         <title>Face Detection</title>
-        <style>
+        <!-- <style>
          #container {
              margin: 0px auto;
-             border: 10px #333 solid;
+             /* border: 10px #333 solid; */
          }
          #videoElement {
-             width: 640px;
-             height: 480px;
+             width: 50%;
+             height: 50%;
              display: none;
              background-color: #666;
          }
 
          #imageElement {
-             width: 640px;
-             height: 480px;
+             width: 50%;
+             height: 50%;
              background-color: #666;
          }
 
          #canvasElement {
-             width: 640px;
-             height: 480px;
-             border: 1px solid black;
+             width: 50%;
+             height: 50%;
+             /* border: 1px solid black; */
          }
          #photo {
-             width: 640px;
-             height: 480px;
+             width: 50%;
+             height: 50%;
 
-             border: 1px solid black;
+             /* border: 1px solid black; */
          }
-        </style>
+        </style> -->
+        <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
+        <!-- <link rel="stylesheet" type="text/css" href="../static/css/style.css" /> -->
     </head>
     <body>
         <div id="container">
-            <div>
-            <video autoplay="true" id="videoElement"></video>
+            <div >
+                <video autoplay="true" id="videoElement"></video>
+                <img id="photo">
                 <canvas id="canvasElement"></canvas>
 
-                <img id="photo">
+                
+                <div id="video_overlay"></div>
             </div>
+        </div>
+        <div id="gui_controls">
+            <button
+              id="switchCameraButton"
+              name="switch Camera"
+              type="button"
+              aria-pressed="false"
+            ></button>
+            <button id="takePhotoButton" name="take Photo" type="button"></button>
+            <button
+              id="toggleFullScreenButton"
+              name="toggle FullScreen"
+              type="button"
+              aria-pressed="false"
+            ></button>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
