@@ -55,6 +55,9 @@ $(document).ready(function(){
   });
 });
 
+var video2;
+var takePhotoButton;
+var toggleFullScreenButton;
 var switchCameraButton;
 var amountOfCameras = 0;
 var currentFacingMode = 'environment';
@@ -113,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
           // init the UI and the camera stream
           initCameraUI();
-          // initCameraStream();
+          initCameraStream();
         });
       })
       .catch(function (error) {
@@ -132,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 });
 
 function initCameraUI() {
-  video = document.getElementById('video');
+  video2 = document.getElementById('video');
 
   takePhotoButton = document.getElementById('takePhotoButton');
   toggleFullScreenButton = document.getElementById('toggleFullScreenButton');
@@ -184,7 +187,7 @@ function initCameraUI() {
       if (currentFacingMode === 'environment') currentFacingMode = 'user';
       else currentFacingMode = 'environment';
 
-      // initCameraStream();
+      initCameraStream();
     });
   }
 
@@ -218,4 +221,56 @@ function initCameraUI() {
     },
     false,
   );
+}
+
+function initCameraStream() {
+  // stop any active streams in the window
+  if (window.stream) {
+    window.stream.getTracks().forEach(function (track) {
+      console.log(track);
+      track.stop();
+    });
+  }
+
+  // we ask for a square resolution, it will cropped on top (landscape)
+  // or cropped at the sides (landscape)
+  var size = 1280;
+
+  var constraints = {
+    audio: false,
+    video: {
+      width: { ideal: size },
+      height: { ideal: size },
+      //width: { min: 1024, ideal: window.innerWidth, max: 1920 },
+      //height: { min: 776, ideal: window.innerHeight, max: 1080 },
+      facingMode: currentFacingMode,
+    },
+  };
+
+  navigator.mediaDevices
+    .getUserMedia(constraints)
+    .then(handleSuccess)
+    .catch(handleError);
+
+  function handleSuccess(stream) {
+    window.stream = stream; // make stream available to browser console
+    video2.srcObject = stream;
+
+    if (constraints.video.facingMode) {
+      if (constraints.video.facingMode === 'environment') {
+        switchCameraButton.setAttribute('aria-pressed', true);
+      } else {
+        switchCameraButton.setAttribute('aria-pressed', false);
+      }
+    }
+
+    const track = window.stream.getVideoTracks()[0];
+    const settings = track.getSettings();
+    str = JSON.stringify(settings, null, 4);
+    console.log('settings ' + str);
+  }
+
+  function handleError(error) {
+    console.error('getUserMedia() error: ', error);
+  }
 }
