@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
     <head>
         <meta charset="utf-8">
         <meta content="ugh, hi." name="description">
@@ -37,23 +37,32 @@
         </style> -->
         <link rel="stylesheet" type="text/css" href="../static/css/style.css" />
         <!-- <link rel="stylesheet" type="text/css" href="../static/css/style.css" /> -->
+        <!-- Bootstrap -->
+   `    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
-    <body>
-        <div id="container">
-            <div id="vid_container">
+    <body class="h-100">
+        <div class='vh-100'>
+            <!-- <div id="vid_container">
                 <video id="video" autoplay playsinline></video>
                 <div id="video_overlay"></div>
-              </div>
+            </div> -->
             
             
-            <!-- <div  id="vid_container">
-                <video autoplay="true" id="videoElement"></video>
-                <img id="photo">
-                <canvas id="canvasElement"></canvas>
-
+            <div class='container-fluid vh-100' id="vid_container">
+                <div class='row vh-100 nopadding'>
+                    <div class='col vh-100'>
+                        <img id="photo">
+                    </div>
+                    <div class='col vh-100'>
+                        <video autoplay="true" id="videoElement"></video>
+                        <canvas id="canvasElement"></canvas>
+                    </div>
+                    
+                    
+                </div>
                 
                 <div id="video_overlay"></div>
-            </div> -->
+            </div>
         
             <div id="gui_controls">
                 <button
